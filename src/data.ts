@@ -1,4 +1,4 @@
-export const questionList = {
+export let questionList = {
   "88": {
     title: "Merge Sorted Array",
     question: `<p>You are given two integer arrays <code>nums1</code> and <code>nums2</code>, sorted in <strong>non-decreasing order</strong>, and two integers <code>m</code> and <code>n</code>, representing the number of elements in <code>nums1</code> and <code>nums2</code> respectively.</p>
@@ -46,6 +46,23 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 
 <p>&nbsp;</p>
 <p><strong>Follow up: </strong>Can you come up with an algorithm that runs in <code>O(m + n)</code> time?</p>`,
-    answer: "",
+    default: `function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+    // TODO
+};
+
+// test case
+const nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3;
+merge(nums1, m, nums2, n);`,
+    answer: `function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+    // Solution 1
+    nums1.splice(m, n, ...nums2);
+    nums1.sort((a, b) => a - b);
+    
+    console.log(nums1);
+};
+
+// test case
+const nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3;
+merge(nums1, m, nums2, n);`,
   },
 };

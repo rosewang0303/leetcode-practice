@@ -10,6 +10,9 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: monospace;
+  font-size: $text-font-size;
+  line-height: $text-font-height;
 }
 
 #app {
@@ -21,6 +24,9 @@ body {
 ul,
 ol {
   padding-left: 20px;
+}
+li {
+  margin: 4px 0;
 }
 code {
   border: solid 1px $light-gray;
@@ -52,7 +58,15 @@ button {
   transition: 0.3s all ease;
 
   &:hover {
-    background-color: $dark-gray;
+    background-color: $gray;
     color: $white;
+  }
+}
+a {
+  color: $white;
+  transition: 0.3s all ease;
+
+  &:hover {
+    color: $gray;
   }
 }
