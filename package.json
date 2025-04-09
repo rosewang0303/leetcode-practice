@@ -13,11 +13,13 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@babel/standalone": "^7.27.0",
     "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "codemirror": "^6.0.1",
+    "prettier": "^3.5.3",
     "sass": "^1.86.3",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
