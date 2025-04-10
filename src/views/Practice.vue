@@ -1,60 +1,65 @@
 <template>
-  <RouterLink :to="`/`">< back</RouterLink>
-  <template v-if="isIdValid">
-    <!-- <component :is="dynamicComponent"></component> -->
-    <div class="practice">
-      <div class="practice__wrap">
-        <!-- question -->
-        <Block class="question">
-          <template v-slot:title
-            ><div>{{ route.params.id }}. {{ question.title }}</div></template
-          >
-          <template v-slot:content>
-            <div class="question__content" v-html="question.question"></div>
-          </template>
-        </Block>
-        <div class="block__wrap">
-          <!-- code -->
-          <Block class="code">
+  <BasicLayout>
+    <template v-if="isIdValid">
+      <!-- <component :is="dynamicComponent"></component> -->
+      <div class="practice">
+        <div class="practice__wrap">
+          <!-- question -->
+          <Block class="question">
             <template v-slot:title
-              ><div class="code__title">
-                <div>Code</div>
-                <div>
-                  <button @click="runCode">Run</button>
-                  <button @click="saveCode">Save</button>
-                  <button @click="resetCode">Reset</button>
-                </div>
-              </div></template
+              ><div>{{ route.params.id }}. {{ question.title }}</div></template
             >
-            <template v-slot:content
-              ><div class="code__content">
-                <CodeEditor
-                  v-if="question"
-                  @onChange="codeChangeHandler"
-                  :defaultVal="
-                    question.answer.length > 0
-                      ? question.answer
-                      : question.default
-                  "
-                /></div
-            ></template>
-          </Block>
-          <!-- result -->
-          <Block class="output">
-            <template v-slot:title><div>Output</div></template>
-            <template v-slot:content
-              ><div class="output__content">
-                <p v-for="(line, idx) in output" :key="idx" :class="line.type">
-                  {{ line.text }}
-                </p>
-              </div>
+            <template v-slot:content>
+              <div class="question__content" v-html="question.question"></div>
             </template>
           </Block>
+          <div class="block__wrap">
+            <!-- code -->
+            <Block class="code">
+              <template v-slot:title
+                ><div class="code__title">
+                  <div>Code</div>
+                  <div>
+                    <button @click="runCode">Run</button>
+                    <button @click="saveCode">Save</button>
+                    <button @click="resetCode">Reset</button>
+                  </div>
+                </div></template
+              >
+              <template v-slot:content
+                ><div class="code__content">
+                  <CodeEditor
+                    v-if="question"
+                    @onChange="codeChangeHandler"
+                    :defaultVal="
+                      question.answer.length > 0
+                        ? question.answer
+                        : question.default
+                    "
+                  /></div
+              ></template>
+            </Block>
+            <!-- result -->
+            <Block class="output">
+              <template v-slot:title><div>Output</div></template>
+              <template v-slot:content
+                ><div class="output__content">
+                  <p
+                    v-for="(line, idx) in output"
+                    :key="idx"
+                    :class="line.type"
+                  >
+                    {{ line.text }}
+                  </p>
+                </div>
+              </template>
+            </Block>
+          </div>
         </div>
       </div>
-    </div>
-  </template>
-  <template v-else><div>Not Found</div></template>
+    </template>
+    <template v-else><div>Not Found</div></template>
+  </BasicLayout>
 </template>
 <script lang="ts" setup>
 import * as Babel from "@babel/standalone";
@@ -62,6 +67,7 @@ import { useRoute } from "vue-router";
 import { questionList } from "@/data";
 
 import { ref, defineAsyncComponent, computed, onMounted } from "vue";
+import BasicLayout from "@/components/layouts/Basic.vue";
 import CodeEditor from "@/components/practice/CodeEditor.vue";
 import Block from "@/components/practice/Block.vue";
 
@@ -126,9 +132,10 @@ const resetCode = () => {
 </script>
 <style lang="scss" scoped>
 .practice {
-  padding: 20px;
+  height: 100%;
 
   &__wrap {
+    height: 100%;
     display: flex;
     flex-direction: row;
     gap: 30px;
@@ -136,7 +143,7 @@ const resetCode = () => {
 
   .question {
     width: 40%;
-    max-height: 90vh;
+    max-height: 100%;
 
     &__content {
       overflow: auto;
@@ -147,11 +154,12 @@ const resetCode = () => {
   }
   .code {
     width: 100%;
-    height: 60vh;
+    height: 70%;
     margin-bottom: 30px;
 
     &__title {
       display: flex;
+      align-items: center;
       justify-content: space-between;
     }
     button {
@@ -164,7 +172,7 @@ const resetCode = () => {
 
   .output {
     width: 100%;
-    height: calc(30vh - 30px);
+    height: calc(30% - 30px);
 
     .log {
       color: #ddd;

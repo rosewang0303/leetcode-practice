@@ -5,8 +5,8 @@ import PracticeView from "@/views/Practice.vue";
 import NotFoundView from "@/views/NotFound.vue";
 
 const routes = [
-  { path: "/", component: HomeView },
-  { path: "/practice/:id", component: PracticeView },
+  { path: "/", name: "home", component: HomeView },
+  { path: "/practice/:id", name: "practice", component: PracticeView },
   {
     path: "/:pathMatch(.*)*",
     component: NotFoundView,
