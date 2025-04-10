@@ -6,7 +6,7 @@
     :indent-with-tab="true"
     :tab-size="4"
     :extensions="extensions"
-    @blur="changeHandler"
+    @change="changeHandler"
   ></codemirror>
 </template>
 <script setup lang="ts">
@@ -30,10 +30,7 @@ const code = ref("");
 watch(
   () => props.defaultVal,
   () => {
-    if (props.defaultVal.length > 0) code.value = props.defaultVal;
-    else
-      code.value = `// console.log('Hello, world!');
-`;
+    code.value = props.defaultVal;
   },
   { immediate: true }
 );

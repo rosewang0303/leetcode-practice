@@ -31,11 +31,7 @@
                   <CodeEditor
                     v-if="question"
                     @onChange="codeChangeHandler"
-                    :defaultVal="
-                      question.answer.length > 0
-                        ? question.answer
-                        : question.default
-                    "
+                    :defaultVal="codeDefaultVal"
                   /></div
               ></template>
             </Block>
@@ -64,7 +60,7 @@
 <script lang="ts" setup>
 import * as Babel from "@babel/standalone";
 import { useRoute } from "vue-router";
-import { questionList } from "@/data";
+import { questionList } from "@/questions";
 
 import { ref, defineAsyncComponent, computed, onMounted } from "vue";
 import BasicLayout from "@/components/layouts/Basic.vue";
@@ -74,6 +70,7 @@ import Block from "@/components/practice/Block.vue";
 const route = useRoute();
 
 const codeStr = ref("");
+const codeDefaultVal = ref("");
 const output = ref([]);
 
 const isIdValid = computed(() => questionList.hasOwnProperty(route.params.id));
@@ -86,6 +83,13 @@ const question = computed(() => {
 //   if (!isIdValid.value) return;
 //   return import(`@/components/practice/${route.params.id}.vue`);
 // });
+
+onMounted(() => {
+  codeDefaultVal.value =
+    question.value.answer.length > 0 && question.value
+      ? question.value.answer
+      : question.value.default;
+});
 
 const codeChangeHandler = (code: string) => {
   codeStr.value = code;
@@ -127,7 +131,9 @@ const saveCode = () => {
 };
 
 const resetCode = () => {
-  codeStr.value = question.value.default;
+  console.error(codeStr.value);
+  codeDefaultVal.value = question.value.default;
+  // codeStr.value = question.value.default;
 };
 </script>
 <style lang="scss" scoped>

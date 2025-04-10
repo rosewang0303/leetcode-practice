@@ -17,7 +17,7 @@
 import { RouterLink } from "vue-router";
 import BasicLayout from "@/components/layouts/Basic.vue";
 
-import { questionList } from "@/data";
+import { questionList } from "@/questions";
 </script>
 <style scoped lang="scss">
 .home {
