@@ -7,6 +7,7 @@
     :tab-size="4"
     :extensions="extensions"
     @change="changeHandler"
+    @blur="changeHandler"
   ></codemirror>
 </template>
 <script setup lang="ts">
@@ -32,7 +33,7 @@ watch(
   () => {
     code.value = props.defaultVal;
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 
 const changeHandler = () => {
