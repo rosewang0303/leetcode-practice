@@ -131,7 +131,7 @@ const saveCode = () => {
 };
 
 const resetCode = () => {
-  // TODO
+  codeDefaultVal.value = question.value.default;
 };
 </script>
 <style lang="scss" scoped>

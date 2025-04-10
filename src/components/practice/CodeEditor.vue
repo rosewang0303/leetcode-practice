@@ -6,8 +6,6 @@
     :indent-with-tab="true"
     :tab-size="4"
     :extensions="extensions"
-    @change="changeHandler"
-    @blur="changeHandler"
   ></codemirror>
 </template>
 <script setup lang="ts">
@@ -36,13 +34,16 @@ watch(
   { immediate: true, deep: true }
 );
 
-const changeHandler = () => {
-  emit("onChange", code.value);
-};
+watch(
+  () => code.value,
+  () => {
+    emit("onChange", code.value);
+  },
+  { deep: true }
+);
 </script>
 <style scoped lang="scss">
 .code-editor {
   text-align: left;
-  //   border: 1px solid $white;
 }
 </style>
